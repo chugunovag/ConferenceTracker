@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading;
 using System.Windows.Forms;
+using ConferenceTracker.core;
 using ConferenceTracker.data;
+using ConferenceTracker.test;
 
 namespace ConferenceTracker
 {
     public partial class ControlPanel : Form
     {
+
+        private static readonly ManualResetEvent StopEvent = new ManualResetEvent(false);
 
         public ControlPanel()
         {
@@ -18,22 +21,17 @@ namespace ConferenceTracker
 
         private void registerBtn_Click(object sender, EventArgs e)
         {
-            RegisterFakeConf(GenerateGisName());
+            RegisterFakeConf();
         }
 
         private void getSectionBtn_Click(object sender, EventArgs e)
         {
-            var client = new HttpClient();
-            var response = client.GetAsync(Program.BaseAddress + "conference/GIS/info").Result;
-            var conferenceInfo = response.Content.ReadAsAsync<ConferenceInfo>().Result;
-            Console.WriteLine(conferenceInfo);
+            Console.WriteLine(RequestHelpers.Get<ConferenceInfo>(Program.BaseAddress + "conference/GIS/info"));
         }
 
         private void findAllBtn_Click(object sender, EventArgs e)
         {
-            var client = new HttpClient();
-            var response = client.GetAsync(Program.BaseAddress + "conference/info").Result;
-            var conferences = response.Content.ReadAsAsync<List<Conference>>().Result;
+            var conferences = RequestHelpers.Get<List<Conference>>(Program.BaseAddress + "conference/info");
             Console.WriteLine($"Conferences found: {conferences.Count}");
             foreach (var conference in conferences)
             {
@@ -47,39 +45,29 @@ namespace ConferenceTracker
         {
             new Thread(o =>
             {
-                while (true)
+                while (!StopEvent.WaitOne(0))
                 {
-                    RegisterFakeConf(GenerateGisName());
+                    RegisterFakeConf();
                     Thread.Sleep(200);
                 }
             }).Start();
         }
 
-        private static string GenerateGisName()
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            return "GIS" + Guid.NewGuid();
+            base.OnFormClosing(e);
+            StopEvent.Set();
         }
 
-        private static void RegisterFakeConf(string sectionName)
+        private static void RegisterFakeConf()
         {
-            var client = new HttpClient();
-            var response = client.PutAsJsonAsync($"{Program.BaseAddress}conference/{sectionName}/info",
-                CreateTestInfo())
-                .Result;
-            Console.WriteLine(response);
-            Console.WriteLine(response.Content.ReadAsAsync<Conference>().Result);
+            var uniqueSection = "GIS" + Guid.NewGuid();
+            var result = RequestHelpers.Put<Conference>($"{Program.BaseAddress}conference/{uniqueSection}/info", 
+                Helpers.CreateTestConference(uniqueSection).Info);
+            Console.WriteLine(result);
         }
 
-        private static ConferenceInfo CreateTestInfo()
-        {
-            return new ConferenceInfo
-            {
-                Name = "Простая конференция",
-                Location = "Rabochaya st, 56",
-                City = "Tomsk"
-            };
-        }
-
+     
         #endregion
 
     }

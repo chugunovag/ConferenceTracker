@@ -16,7 +16,7 @@ namespace ConferenceTracker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            WebApp.Start<Startup2>(BaseAddress);
+            WebApp.Start<Startup>(BaseAddress);
             Application.Run(new ControlPanel());
         }
     }
