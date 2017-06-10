@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceTracker", "ConferenceTracker\ConferenceTracker.csproj", "{1F9DDF8C-EEDA-4662-A0C5-771E4619ADEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceTracerTester", "StressTest\ConferenceTracerTester.csproj", "{99A76B38-DB3F-434A-A2BE-80A7C9A4676B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceTrackerTester", "StressTest\ConferenceTrackerTester.csproj", "{99A76B38-DB3F-434A-A2BE-80A7C9A4676B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{14CBC49D-E18B-4C64-B201-9130C39698FA}"
 EndProject
