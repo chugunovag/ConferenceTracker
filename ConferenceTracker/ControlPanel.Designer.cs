@@ -28,59 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.registerBtn = new System.Windows.Forms.Button();
-            this.findAllBtn = new System.Windows.Forms.Button();
-            this.getSectionBtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.addressTextFld = new System.Windows.Forms.TextBox();
+            this.startBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // registerBtn
+            // label1
             // 
-            this.registerBtn.Location = new System.Drawing.Point(86, 12);
-            this.registerBtn.Name = "registerBtn";
-            this.registerBtn.Size = new System.Drawing.Size(108, 57);
-            this.registerBtn.TabIndex = 3;
-            this.registerBtn.Text = "Register";
-            this.registerBtn.UseVisualStyleBackColor = true;
-            this.registerBtn.Click += new System.EventHandler(this.registerBtn_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Адрес";
             // 
-            // findAllBtn
+            // addressTextFld
             // 
-            this.findAllBtn.Location = new System.Drawing.Point(86, 138);
-            this.findAllBtn.Name = "findAllBtn";
-            this.findAllBtn.Size = new System.Drawing.Size(108, 57);
-            this.findAllBtn.TabIndex = 4;
-            this.findAllBtn.Text = "Find All";
-            this.findAllBtn.UseVisualStyleBackColor = true;
-            this.findAllBtn.Click += new System.EventHandler(this.findAllBtn_Click);
+            this.addressTextFld.Location = new System.Drawing.Point(50, 12);
+            this.addressTextFld.Name = "addressTextFld";
+            this.addressTextFld.Size = new System.Drawing.Size(257, 20);
+            this.addressTextFld.TabIndex = 6;
+            this.addressTextFld.Text = "http://localhost:9000/";
             // 
-            // getSectionBtn
+            // startBtn
             // 
-            this.getSectionBtn.Location = new System.Drawing.Point(86, 75);
-            this.getSectionBtn.Name = "getSectionBtn";
-            this.getSectionBtn.Size = new System.Drawing.Size(108, 57);
-            this.getSectionBtn.TabIndex = 5;
-            this.getSectionBtn.Text = "Get one";
-            this.getSectionBtn.UseVisualStyleBackColor = true;
-            this.getSectionBtn.Click += new System.EventHandler(this.getSectionBtn_Click);
+            this.startBtn.Location = new System.Drawing.Point(118, 51);
+            this.startBtn.Name = "startBtn";
+            this.startBtn.Size = new System.Drawing.Size(108, 57);
+            this.startBtn.TabIndex = 8;
+            this.startBtn.Text = "Старт";
+            this.startBtn.UseVisualStyleBackColor = true;
+            this.startBtn.Click += new System.EventHandler(this.startBtn_Click);
             // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.getSectionBtn);
-            this.Controls.Add(this.findAllBtn);
-            this.Controls.Add(this.registerBtn);
+            this.ClientSize = new System.Drawing.Size(331, 124);
+            this.Controls.Add(this.startBtn);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.addressTextFld);
             this.Name = "ControlPanel";
-            this.Text = "ControlPanel";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Central server control panel";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button registerBtn;
-        private System.Windows.Forms.Button findAllBtn;
-        private System.Windows.Forms.Button getSectionBtn;
+
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox addressTextFld;
+        private System.Windows.Forms.Button startBtn;
     }
 }
 

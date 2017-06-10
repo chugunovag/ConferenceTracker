@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using ConferenceTracker.data;
+using System.Web.Http.Results;
+using Common;
+using Common.data;
 
 namespace ConferenceTracker.controller
 {
@@ -14,7 +14,7 @@ namespace ConferenceTracker.controller
     [RoutePrefix("conference")]
     public class ConferenceController : ApiController
     {
-        public static Dictionary<string, Conference> Storage { get; } = new Dictionary<string, Conference>();
+        public IStorage Storage => Program.GetStorage();
 
         /// <summary>
         ///     Найти и вернуть список всех когда-либо зарегистрированных конференций
@@ -22,10 +22,11 @@ namespace ConferenceTracker.controller
         /// <returns></returns>
         [HttpGet]
         [Route("info")]
-        public List<Conference> FindAllSections()
+        public IHttpActionResult FindAllSections()
         {
             Console.WriteLine($"GET ALL: available: {Storage.Count}");
-            return Storage.Values.ToList();
+            var listConferences = Storage.ListConferences();
+            return CreateResponse(listConferences);
         }
 
         /// <summary>
@@ -38,31 +39,40 @@ namespace ConferenceTracker.controller
         public IHttpActionResult GetSection(string section)
         {
             Console.WriteLine($"GET ONE: {section}");
-            Conference conference;
-            if (Storage.TryGetValue(section, out conference))
-            {
-                var body = Request.CreateResponse(HttpStatusCode.OK, conference.Info);
-                return new System.Web.Http.Results.ResponseMessageResult(body);
-            }
-
-            var err = Request.CreateResponse(HttpStatusCode.NotFound, "");
-
-            return new System.Web.Http.Results.ResponseMessageResult(err);
-//            throw new HttpResponseException(HttpStatusCode.NotFound);
+            var conference = Storage.GetConference(section);
+            return conference != null ? CreateResponse(conference.Info) : CreateResponse(null, HttpStatusCode.NotFound);
+            //эффект аналогичный, но тут не можем управлять телом ответа
+            //throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
         /// <summary>
-        ///     Регистрирует новую конференцию
+        ///     Регистрирует новую секцию с данными о месте проведения
         /// </summary>
         /// <param name="section">Название секции</param>
         /// <param name="conferenceInfo">подробная информация о конференции</param>
         [HttpPut]
         [Route("{section}/info")]
-        public void RegisterSection(string section, [FromBody] ConferenceInfo conferenceInfo)
+        public IHttpActionResult RegisterSectionInfo(string section, [FromBody] ConferenceInfo conferenceInfo)
         {
             Console.WriteLine($"PUT: {section} -> {conferenceInfo}");
-            var conference = new Conference {Section = section, Info = conferenceInfo};
-            Storage[section] = conference;
+            var conference = Storage.GetConference(section);
+            if (conference == null)
+            {
+                conference = new Conference { Section = section, Info = conferenceInfo };
+            }
+            else
+            {
+                conference.Info = conferenceInfo;
+            }
+            Storage.AddOrUpdate(conference);
+            
+            return CreateResponse(null);
         }
+
+        private ResponseMessageResult CreateResponse(object payload, HttpStatusCode statusCode = HttpStatusCode.OK)
+        {
+            return new ResponseMessageResult(Request.CreateResponse(statusCode, payload));
+        }
+
     }
 }

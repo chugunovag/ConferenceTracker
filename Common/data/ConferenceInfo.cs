@@ -1,6 +1,7 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
-namespace ConferenceTracker.data
+namespace Common.data
 {
     /// <summary>
     /// Информация о конференции: место, название  ит.п.
@@ -31,10 +32,11 @@ namespace ConferenceTracker.data
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((ConferenceInfo) obj);
         }
 
+        [SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode")]
         public override int GetHashCode()
         {
             unchecked

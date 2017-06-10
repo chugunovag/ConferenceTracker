@@ -1,13 +1,21 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
-namespace ConferenceTracker.data
+namespace Common.data
 {
     /// <summary>
     /// Описание конференции: секция + информация 
+    /// POKO объект для хранения в БД
     /// </summary>
     [DataContract(Name = "conference")]
     public class Conference
     {
+        /// <summary>
+        /// Необходимо для хранения в LiteDB
+        /// </summary>
+        [IgnoreDataMember]
+        public int Id { get; set; }
+
         [DataMember(Name = "section")]
         public string Section { get; set; }
 
@@ -28,16 +36,22 @@ namespace ConferenceTracker.data
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Conference) obj);
         }
 
+        [SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode")]
         public override int GetHashCode()
         {
             unchecked
             {
                 return ((Section?.GetHashCode() ?? 0)*397) ^ (Info?.GetHashCode() ?? 0);
             }
+        }
+
+        public Conference Convert()
+        {
+            return this;
         }
     }
 }
