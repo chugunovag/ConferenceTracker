@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InPlaceServer.cs" />
+    <Compile Include="TestController.cs" />
     <Compile Include="TestPanel.cs">
       <SubType>Form</SubType>
     </Compile>

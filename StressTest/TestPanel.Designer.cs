@@ -28,33 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.urlFld = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.logBox = new System.Windows.Forms.RichTextBox();
             this.autoBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.citiesListBox = new System.Windows.Forms.ListBox();
+            this.sectionsListBox = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.findAllBtn = new System.Windows.Forms.Button();
-            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.streetsListBox = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.findOneBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.sectionTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // urlFld
             // 
-            this.textBox1.Location = new System.Drawing.Point(15, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(257, 20);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "http://localhost:9000/";
+            this.urlFld.Location = new System.Drawing.Point(15, 25);
+            this.urlFld.Name = "urlFld";
+            this.urlFld.Size = new System.Drawing.Size(257, 20);
+            this.urlFld.TabIndex = 0;
+            this.urlFld.Text = "http://localhost:9000/";
             // 
             // label1
             // 
@@ -97,10 +97,10 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Города";
             // 
-            // listBox1
+            // citiesListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
+            this.citiesListBox.FormattingEnabled = true;
+            this.citiesListBox.Items.AddRange(new object[] {
             "",
             "Ангарск",
             "Анжеро-Судженск",
@@ -178,15 +178,15 @@
             "Химки",
             "Чайковский",
             "Чапаевск"});
-            this.listBox1.Location = new System.Drawing.Point(12, 38);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 147);
-            this.listBox1.TabIndex = 7;
+            this.citiesListBox.Location = new System.Drawing.Point(12, 38);
+            this.citiesListBox.Name = "citiesListBox";
+            this.citiesListBox.Size = new System.Drawing.Size(120, 147);
+            this.citiesListBox.TabIndex = 7;
             // 
-            // listBox2
+            // sectionsListBox
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Items.AddRange(new object[] {
+            this.sectionsListBox.FormattingEnabled = true;
+            this.sectionsListBox.Items.AddRange(new object[] {
             "GIS",
             "MATH",
             "ASU",
@@ -201,10 +201,10 @@
             "HR",
             "GEO",
             "RE"});
-            this.listBox2.Location = new System.Drawing.Point(287, 38);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(120, 147);
-            this.listBox2.TabIndex = 9;
+            this.sectionsListBox.Location = new System.Drawing.Point(287, 38);
+            this.sectionsListBox.Name = "sectionsListBox";
+            this.sectionsListBox.Size = new System.Drawing.Size(120, 147);
+            this.sectionsListBox.TabIndex = 9;
             // 
             // label3
             // 
@@ -225,10 +225,10 @@
             this.findAllBtn.UseVisualStyleBackColor = true;
             this.findAllBtn.Click += new System.EventHandler(this.findAllBtn_Click);
             // 
-            // listBox3
+            // streetsListBox
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.Items.AddRange(new object[] {
+            this.streetsListBox.FormattingEnabled = true;
+            this.streetsListBox.Items.AddRange(new object[] {
             "Улица 19 Гвардейской Дивизии",
             "Переулок 1905 года",
             "Улица 30-летия Победы",
@@ -319,10 +319,10 @@
             "Улица Беринга",
             "Бийская улица",
             "Улица Бирюкова"});
-            this.listBox3.Location = new System.Drawing.Point(149, 38);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(120, 147);
-            this.listBox3.TabIndex = 11;
+            this.streetsListBox.Location = new System.Drawing.Point(149, 38);
+            this.streetsListBox.Name = "streetsListBox";
+            this.streetsListBox.Size = new System.Drawing.Size(120, 147);
+            this.streetsListBox.TabIndex = 11;
             // 
             // label4
             // 
@@ -346,13 +346,13 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Controls.Add(this.citiesListBox);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.autoBtn);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.listBox3);
-            this.groupBox1.Controls.Add(this.listBox2);
+            this.groupBox1.Controls.Add(this.streetsListBox);
+            this.groupBox1.Controls.Add(this.sectionsListBox);
             this.groupBox1.Location = new System.Drawing.Point(15, 51);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(421, 228);
@@ -364,7 +364,7 @@
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.sectionTextBox);
             this.groupBox2.Controls.Add(this.findOneBtn);
             this.groupBox2.Controls.Add(this.findAllBtn);
             this.groupBox2.Location = new System.Drawing.Point(15, 285);
@@ -373,14 +373,6 @@
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Поиск";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(59, 19);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(210, 20);
-            this.textBox2.TabIndex = 16;
-            this.textBox2.Text = "GIS";
             // 
             // label5
             // 
@@ -391,6 +383,14 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Секция";
             // 
+            // sectionTextBox
+            // 
+            this.sectionTextBox.Location = new System.Drawing.Point(59, 19);
+            this.sectionTextBox.Name = "sectionTextBox";
+            this.sectionTextBox.Size = new System.Drawing.Size(210, 20);
+            this.sectionTextBox.TabIndex = 16;
+            this.sectionTextBox.Text = "GIS";
+            // 
             // TestPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,7 +400,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.logBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.urlFld);
             this.Name = "TestPanel";
             this.Text = "TestPanel";
             this.groupBox1.ResumeLayout(false);
@@ -414,22 +414,22 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox urlFld;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox logBox;
         private System.Windows.Forms.Button autoBtn;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox citiesListBox;
+        private System.Windows.Forms.ListBox sectionsListBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button findAllBtn;
-        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.ListBox streetsListBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button findOneBtn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox sectionTextBox;
     }
 }
 

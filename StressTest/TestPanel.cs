@@ -1,73 +1,88 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace StressTest
 {
     public partial class TestPanel : Form
     {
+        private readonly TestController _controller;
 
-        //        private static readonly ManualResetEvent StopEvent = new ManualResetEvent(false);
-
-
+        private string Url => urlFld.Text;
+        
         public TestPanel()
         {
             InitializeComponent();
+            _controller = new TestController();
+            InitControls();
         }
 
-        private void autoBtn_Click(object sender, System.EventArgs e)
+        private void autoBtn_Click(object sender, EventArgs e)
         {
-
+            if (!_controller.IsAutoTestRunning())
+            {
+                var cities = citiesListBox.Items.OfType<string>().ToList();
+                var streets = streetsListBox.Items.OfType<string>().ToList();
+                var sections = sectionsListBox.Items.OfType<string>().ToList();
+                _controller.DoAutoTest(Url, cities, streets, sections);
+            }
+            else
+            {
+                _controller.StopAutoTest();
+            }
+            InitControls();
         }
 
-        private void findOneBtn_Click(object sender, System.EventArgs e)
+        private void InitControls()
         {
-
+            autoBtn.Text = _controller.IsAutoTestRunning() ? "Стоп" : "Старт";
         }
 
-        private void findAllBtn_Click(object sender, System.EventArgs e)
+        private void findOneBtn_Click(object sender, EventArgs e)
         {
-
+            ClearLog();
+            try
+            {
+                Log(_controller.GetSection(Url, sectionTextBox.Text)?.ToString());
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
+            }
         }
 
-        /*  private void registerBtn_Click(object sender, EventArgs e)
+        private void findAllBtn_Click(object sender, EventArgs e)
+        {
+            ClearLog();
+            try
+            {
+                _controller.GetAll(Url)?.ForEach(conference =>
                 {
-                    new Thread(o =>
-                    {
-                        while (!StopEvent.WaitOne(0))
-                        {
-                            var uniqueSection = "GIS" + Guid.NewGuid();
-                            var result = Helpers.Put<Conference>($"{Program.BaseAddress}conference/{uniqueSection}/info",
-                                Helpers.CreateTestConference(uniqueSection).Info);
-                            Console.WriteLine(result);
-                            Thread.Sleep(20);
-                        }
-                    }).Start();
-                }
+                    Log(conference.ToString());
+                });
+            }
+            catch (Exception ex)
+            {
+                Log(ex.ToString());
+            }
+        }
 
-                private void getSectionBtn_Click(object sender, EventArgs e)
-                {
-                    Console.WriteLine(Helpers.Get<ConferenceInfo>(Program.BaseAddress + "conference/GIS/info"));
-                }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            _controller.Dispose();
+        }
 
-                private void findAllBtn_Click(object sender, EventArgs e)
-                {
-                    var conferences = Helpers.Get<List<Conference>>(Program.BaseAddress + "conference/info");
-                    if (conferences == null)
-                    {
-                        Console.WriteLine($"Conferences not found");
-                        return;
-                    }
-                    Console.WriteLine($"Conferences found: {conferences.Count}");
-                    foreach (var conference in conferences)
-                    {
-                        Console.WriteLine($"{conference}");
-                    }
-                }
+        private void Log(string s)
+        {
+            logBox.AppendText($"\n{s}");
+        }
 
-                protected override void OnFormClosing(FormClosingEventArgs e)
-                {
-                    base.OnFormClosing(e);
-                  StopEvent.Set();
-                }
-                */
+        private void ClearLog()
+        {
+            logBox.Clear();
+        }
+
     }
 }

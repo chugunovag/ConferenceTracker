@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using Common.data;
 using Newtonsoft.Json;
@@ -40,20 +39,6 @@ namespace Common.helper
             var response = client.PutAsJsonAsync(url, conferenceInfo).Result;
             responseCode = response.StatusCode;
             return response.Content.ReadAsAsync<T>().Result;
-        }
-
-        public static Conference CreateTestConference(string section)
-        {
-            return new Conference
-            {
-                Section = section,
-                Info = new ConferenceInfo
-                {
-                    Name = "Простая #" + Guid.NewGuid(),
-                    Location = "Rabochaya st, " + new Random().Next(1000),
-                    City = "Tomsk"
-                }
-            };
         }
     }
 }

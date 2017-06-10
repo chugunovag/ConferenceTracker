@@ -21,8 +21,8 @@ namespace ConferenceTracker.test
         public void Setup()
         {
             Program.DiKernel.Bind<IStorage>().ToConstant(new SqliteStorage(TestDbPath));
-            _gisConf = Helpers.CreateTestConference("GIS");
-            _oilConf = Helpers.CreateTestConference("OIL");
+            _gisConf = CreateTestConference("GIS");
+            _oilConf = CreateTestConference("OIL");
         }
 
         [TearDown]
@@ -122,7 +122,7 @@ namespace ConferenceTracker.test
         /// <summary>
         /// Данные от серверов не приславших advertise-запрос, не должны сохраняться. 
         /// Таким серверам нужно отвечать пустым ответом с кодом 400 Bad Request.
-        /// Возможно это условие не актуально.
+        /// Возможно это условие не актуально. В текуще реализации данные принимаются одновременно с регистрацией.
         /// </summary>
         [Test]
         public void TestMissingAdvertize()
@@ -167,5 +167,20 @@ namespace ConferenceTracker.test
                 Assert.AreEqual(_oilConf.Info, conferenceOil, "Объект должен полностью соответствовать зарегистрированному");
             });
         }
+
+        public static Conference CreateTestConference(string section)
+        {
+            return new Conference
+            {
+                Section = section,
+                Info = new ConferenceInfo
+                {
+                    Name = "Простая #" + Guid.NewGuid(),
+                    Location = "Rabochaya st, " + new Random().Next(1000),
+                    City = "Tomsk"
+                }
+            };
+        }
+
     }
 }
