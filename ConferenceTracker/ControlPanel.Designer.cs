@@ -46,15 +46,15 @@
             // 
             this.addressTextFld.Location = new System.Drawing.Point(50, 12);
             this.addressTextFld.Name = "addressTextFld";
-            this.addressTextFld.Size = new System.Drawing.Size(257, 20);
+            this.addressTextFld.Size = new System.Drawing.Size(200, 20);
             this.addressTextFld.TabIndex = 6;
             this.addressTextFld.Text = "http://localhost:9000/";
             // 
             // startBtn
             // 
-            this.startBtn.Location = new System.Drawing.Point(118, 51);
+            this.startBtn.Location = new System.Drawing.Point(256, 12);
             this.startBtn.Name = "startBtn";
-            this.startBtn.Size = new System.Drawing.Size(108, 57);
+            this.startBtn.Size = new System.Drawing.Size(108, 20);
             this.startBtn.TabIndex = 8;
             this.startBtn.Text = "Старт";
             this.startBtn.UseVisualStyleBackColor = true;
@@ -64,13 +64,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(331, 124);
+            this.ClientSize = new System.Drawing.Size(375, 43);
             this.Controls.Add(this.startBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.addressTextFld);
             this.Name = "ControlPanel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Central server control panel";
+            this.Text = "Консоль центрального сервера";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.urlFld = new System.Windows.Forms.TextBox();
+            this.urlBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.logBox = new System.Windows.Forms.RichTextBox();
             this.autoBtn = new System.Windows.Forms.Button();
@@ -43,18 +43,28 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.sectionTextBox = new System.Windows.Forms.TextBox();
+            this.sectionSearchBox = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.sectionRegisterBox = new System.Windows.Forms.TextBox();
+            this.regBtn = new System.Windows.Forms.Button();
+            this.nameLbl = new System.Windows.Forms.Label();
+            this.infoNameBox = new System.Windows.Forms.TextBox();
+            this.locationBox = new System.Windows.Forms.TextBox();
+            this.locationlbl = new System.Windows.Forms.Label();
+            this.cityBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // urlFld
+            // urlBox
             // 
-            this.urlFld.Location = new System.Drawing.Point(15, 25);
-            this.urlFld.Name = "urlFld";
-            this.urlFld.Size = new System.Drawing.Size(257, 20);
-            this.urlFld.TabIndex = 0;
-            this.urlFld.Text = "http://localhost:9000/";
+            this.urlBox.Location = new System.Drawing.Point(15, 25);
+            this.urlBox.Name = "urlBox";
+            this.urlBox.Size = new System.Drawing.Size(257, 20);
+            this.urlBox.TabIndex = 0;
+            this.urlBox.Text = "http://localhost:9000/";
             // 
             // label1
             // 
@@ -72,9 +82,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.logBox.BackColor = System.Drawing.Color.White;
             this.logBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.logBox.Location = new System.Drawing.Point(15, 372);
+            this.logBox.Location = new System.Drawing.Point(15, 451);
             this.logBox.Name = "logBox";
-            this.logBox.Size = new System.Drawing.Size(421, 350);
+            this.logBox.Size = new System.Drawing.Size(421, 209);
             this.logBox.TabIndex = 2;
             this.logBox.Text = "";
             // 
@@ -217,9 +227,9 @@
             // 
             // findAllBtn
             // 
-            this.findAllBtn.Location = new System.Drawing.Point(287, 46);
+            this.findAllBtn.Location = new System.Drawing.Point(312, 18);
             this.findAllBtn.Name = "findAllBtn";
-            this.findAllBtn.Size = new System.Drawing.Size(120, 23);
+            this.findAllBtn.Size = new System.Drawing.Size(95, 23);
             this.findAllBtn.TabIndex = 10;
             this.findAllBtn.Text = "Показать все";
             this.findAllBtn.UseVisualStyleBackColor = true;
@@ -335,9 +345,9 @@
             // 
             // findOneBtn
             // 
-            this.findOneBtn.Location = new System.Drawing.Point(287, 17);
+            this.findOneBtn.Location = new System.Drawing.Point(239, 18);
             this.findOneBtn.Name = "findOneBtn";
-            this.findOneBtn.Size = new System.Drawing.Size(120, 23);
+            this.findOneBtn.Size = new System.Drawing.Size(67, 23);
             this.findOneBtn.TabIndex = 13;
             this.findOneBtn.Text = "Найти";
             this.findOneBtn.UseVisualStyleBackColor = true;
@@ -364,12 +374,12 @@
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.sectionTextBox);
+            this.groupBox2.Controls.Add(this.sectionSearchBox);
             this.groupBox2.Controls.Add(this.findOneBtn);
             this.groupBox2.Controls.Add(this.findAllBtn);
             this.groupBox2.Location = new System.Drawing.Point(15, 285);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(421, 81);
+            this.groupBox2.Size = new System.Drawing.Size(421, 52);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Поиск";
@@ -377,36 +387,126 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 22);
+            this.label5.Location = new System.Drawing.Point(22, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(44, 13);
             this.label5.TabIndex = 16;
             this.label5.Text = "Секция";
             // 
-            // sectionTextBox
+            // sectionSearchBox
             // 
-            this.sectionTextBox.Location = new System.Drawing.Point(59, 19);
-            this.sectionTextBox.Name = "sectionTextBox";
-            this.sectionTextBox.Size = new System.Drawing.Size(210, 20);
-            this.sectionTextBox.TabIndex = 16;
-            this.sectionTextBox.Text = "GIS";
+            this.sectionSearchBox.Location = new System.Drawing.Point(72, 19);
+            this.sectionSearchBox.Name = "sectionSearchBox";
+            this.sectionSearchBox.Size = new System.Drawing.Size(161, 20);
+            this.sectionSearchBox.TabIndex = 16;
+            this.sectionSearchBox.Text = "GIS";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.groupBox3.Controls.Add(this.cityBox);
+            this.groupBox3.Controls.Add(this.locationlbl);
+            this.groupBox3.Controls.Add(this.locationBox);
+            this.groupBox3.Controls.Add(this.nameLbl);
+            this.groupBox3.Controls.Add(this.infoNameBox);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.sectionRegisterBox);
+            this.groupBox3.Controls.Add(this.regBtn);
+            this.groupBox3.Location = new System.Drawing.Point(15, 343);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(421, 102);
+            this.groupBox3.TabIndex = 17;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Регистрация";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(22, 25);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 13);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Секция";
+            // 
+            // sectionRegisterBox
+            // 
+            this.sectionRegisterBox.Location = new System.Drawing.Point(72, 22);
+            this.sectionRegisterBox.Name = "sectionRegisterBox";
+            this.sectionRegisterBox.Size = new System.Drawing.Size(161, 20);
+            this.sectionRegisterBox.TabIndex = 16;
+            this.sectionRegisterBox.Text = "GIS";
+            // 
+            // regBtn
+            // 
+            this.regBtn.Location = new System.Drawing.Point(239, 20);
+            this.regBtn.Name = "regBtn";
+            this.regBtn.Size = new System.Drawing.Size(168, 45);
+            this.regBtn.TabIndex = 10;
+            this.regBtn.Text = "Зарегистрировать";
+            this.regBtn.UseVisualStyleBackColor = true;
+            this.regBtn.Click += new System.EventHandler(this.regBtn_Click);
+            // 
+            // nameLbl
+            // 
+            this.nameLbl.AutoSize = true;
+            this.nameLbl.Location = new System.Drawing.Point(9, 48);
+            this.nameLbl.Name = "nameLbl";
+            this.nameLbl.Size = new System.Drawing.Size(57, 13);
+            this.nameLbl.TabIndex = 17;
+            this.nameLbl.Text = "Название";
+            // 
+            // infoNameBox
+            // 
+            this.infoNameBox.Location = new System.Drawing.Point(72, 45);
+            this.infoNameBox.Name = "infoNameBox";
+            this.infoNameBox.Size = new System.Drawing.Size(161, 20);
+            this.infoNameBox.TabIndex = 18;
+            this.infoNameBox.Text = "GeoInfoSys";
+            // 
+            // locationBox
+            // 
+            this.locationBox.Location = new System.Drawing.Point(181, 70);
+            this.locationBox.Name = "locationBox";
+            this.locationBox.Size = new System.Drawing.Size(226, 20);
+            this.locationBox.TabIndex = 19;
+            this.locationBox.Text = "Lenina st, 81";
+            // 
+            // locationlbl
+            // 
+            this.locationlbl.AutoSize = true;
+            this.locationlbl.Location = new System.Drawing.Point(27, 73);
+            this.locationlbl.Name = "locationlbl";
+            this.locationlbl.Size = new System.Drawing.Size(39, 13);
+            this.locationlbl.TabIndex = 20;
+            this.locationlbl.Text = "Место";
+            // 
+            // cityBox
+            // 
+            this.cityBox.Location = new System.Drawing.Point(72, 70);
+            this.cityBox.Name = "cityBox";
+            this.cityBox.Size = new System.Drawing.Size(103, 20);
+            this.cityBox.TabIndex = 21;
+            this.cityBox.Text = "Tomsk";
             // 
             // TestPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(448, 725);
+            this.ClientSize = new System.Drawing.Size(448, 663);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.logBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.urlFld);
+            this.Controls.Add(this.urlBox);
             this.Name = "TestPanel";
-            this.Text = "TestPanel";
+            this.Text = "Консоль тестового клиента";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -414,7 +514,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox urlFld;
+        private System.Windows.Forms.TextBox urlBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox logBox;
         private System.Windows.Forms.Button autoBtn;
@@ -429,7 +529,16 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox sectionTextBox;
+        private System.Windows.Forms.TextBox sectionSearchBox;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox sectionRegisterBox;
+        private System.Windows.Forms.Button regBtn;
+        private System.Windows.Forms.Label nameLbl;
+        private System.Windows.Forms.TextBox infoNameBox;
+        private System.Windows.Forms.TextBox locationBox;
+        private System.Windows.Forms.TextBox cityBox;
+        private System.Windows.Forms.Label locationlbl;
     }
 }
 

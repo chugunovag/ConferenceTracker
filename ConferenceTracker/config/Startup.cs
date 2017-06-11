@@ -5,15 +5,13 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Owin;
 
-namespace ConferenceTracker.config
-{
+namespace ConferenceTracker.config {
     /// <summary>
-    /// Конфигурация веб сервера. JSON используется по умолчанию, добавим только мапинг роутов по атрибутам и CamelCasePropertyNames на всякий случай 
+    ///     Конфигурация веб сервера. JSON используется по умолчанию, добавим только мапинг роутов по атрибутам и
+    ///     CamelCasePropertyNames на всякий случай
     /// </summary>
-    public class Startup
-    {
-        public void Configuration(IAppBuilder appBuilder)
-        {
+    public class Startup {
+        public void Configuration(IAppBuilder appBuilder) {
             var config = new HttpConfiguration();
             config.Formatters.Clear();
             config.Formatters.Add(new JsonMediaTypeFormatter());

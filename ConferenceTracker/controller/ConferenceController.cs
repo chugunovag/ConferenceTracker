@@ -6,14 +6,12 @@ using System.Web.Http.Results;
 using Common;
 using Common.data;
 
-namespace ConferenceTracker.controller
-{
+namespace ConferenceTracker.controller {
     /// <summary>
     ///     Контроллер для управления запросами конференций
     /// </summary>
     [RoutePrefix("conference")]
-    public class ConferenceController : ApiController
-    {
+    public class ConferenceController : ApiController {
         public IStorage Storage => Program.GetStorage();
 
         /// <summary>
@@ -22,8 +20,7 @@ namespace ConferenceTracker.controller
         /// <returns></returns>
         [HttpGet]
         [Route("info")]
-        public IHttpActionResult FindAllSections()
-        {
+        public IHttpActionResult FindAllSections() {
             Console.WriteLine($"GET ALL: available: {Storage.Count}");
             var listConferences = Storage.ListConferences();
             return CreateResponse(listConferences);
@@ -36,8 +33,7 @@ namespace ConferenceTracker.controller
         /// <returns>Конференция, либо пусто, если конференций по данной секции не было зарегистрировано</returns>
         [HttpGet]
         [Route("{section}/info")]
-        public IHttpActionResult GetSection(string section)
-        {
+        public IHttpActionResult GetSection(string section) {
             Console.WriteLine($"GET ONE: {section}");
             var conference = Storage.GetConference(section);
             return conference != null ? CreateResponse(conference.Info) : CreateResponse(null, HttpStatusCode.NotFound);
@@ -52,27 +48,22 @@ namespace ConferenceTracker.controller
         /// <param name="conferenceInfo">подробная информация о конференции</param>
         [HttpPut]
         [Route("{section}/info")]
-        public IHttpActionResult RegisterSectionInfo(string section, [FromBody] ConferenceInfo conferenceInfo)
-        {
+        public IHttpActionResult RegisterSectionInfo(string section, [FromBody] ConferenceInfo conferenceInfo) {
             Console.WriteLine($"PUT: {section} -> {conferenceInfo}");
             var conference = Storage.GetConference(section);
-            if (conference == null)
-            {
-                conference = new Conference { Section = section, Info = conferenceInfo };
+            if (conference == null) {
+                conference = new Conference {Section = section, Info = conferenceInfo};
             }
-            else
-            {
+            else {
                 conference.Info = conferenceInfo;
             }
             Storage.AddOrUpdate(conference);
-            
+
             return CreateResponse(null);
         }
 
-        private ResponseMessageResult CreateResponse(object payload, HttpStatusCode statusCode = HttpStatusCode.OK)
-        {
+        private ResponseMessageResult CreateResponse(object payload, HttpStatusCode statusCode = HttpStatusCode.OK) {
             return new ResponseMessageResult(Request.CreateResponse(statusCode, payload));
         }
-
     }
 }
