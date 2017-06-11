@@ -39,7 +39,7 @@ namespace ConferenceTracker.test {
 
         private void WrapServerContext(Action action) {
             try {
-                Server.Instance.Start("http://localhost:9123");
+                Server.Instance.Start("http://localhost:9123/");
                 action.Invoke();
             }
             finally {
