@@ -9,6 +9,12 @@ using ConferenceTracker.core;
 using NUnit.Framework;
 
 namespace ConferenceTracker.test {
+
+    /// <summary>
+    /// Тестируем всю функциональность центрального сервера. 
+    /// Недостаток данного теста в том, что приходиться поднимать весь функционал, что делает его практически интеграционным.
+    /// Но в виду малых масштабов допустимо.
+    /// </summary>
     [TestFixture]
     public class TestApi {
         [SetUp]
@@ -33,7 +39,7 @@ namespace ConferenceTracker.test {
 
         private void WrapServerContext(Action action) {
             try {
-                Server.Instance.Start("http://localhost:9000/");
+                Server.Instance.Start("http://localhost:9123");
                 action.Invoke();
             }
             finally {
@@ -100,7 +106,7 @@ namespace ConferenceTracker.test {
         ///     Таким серверам нужно отвечать пустым ответом с кодом 400 Bad Request.
         ///     Возможно это условие не актуально. В текуще реализации данные принимаются одновременно с регистрацией.
         /// </summary>
-        [Test]
+        [Test, Ignore("Функциональность advertise под вопросом.")]
         public void TestMissingAdvertize() {
             WrapServerContext(delegate
             {
