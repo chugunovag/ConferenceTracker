@@ -45,14 +45,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.sectionSearchBox = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cityBox = new System.Windows.Forms.TextBox();
+            this.locationlbl = new System.Windows.Forms.Label();
+            this.locationBox = new System.Windows.Forms.TextBox();
+            this.nameLbl = new System.Windows.Forms.Label();
+            this.infoNameBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.sectionRegisterBox = new System.Windows.Forms.TextBox();
             this.regBtn = new System.Windows.Forms.Button();
-            this.nameLbl = new System.Windows.Forms.Label();
-            this.infoNameBox = new System.Windows.Forms.TextBox();
-            this.locationBox = new System.Windows.Forms.TextBox();
-            this.locationlbl = new System.Windows.Forms.Label();
-            this.cityBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -419,6 +419,48 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Регистрация";
             // 
+            // cityBox
+            // 
+            this.cityBox.Location = new System.Drawing.Point(72, 70);
+            this.cityBox.Name = "cityBox";
+            this.cityBox.Size = new System.Drawing.Size(103, 20);
+            this.cityBox.TabIndex = 21;
+            this.cityBox.Text = "Tomsk";
+            // 
+            // locationlbl
+            // 
+            this.locationlbl.AutoSize = true;
+            this.locationlbl.Location = new System.Drawing.Point(27, 73);
+            this.locationlbl.Name = "locationlbl";
+            this.locationlbl.Size = new System.Drawing.Size(39, 13);
+            this.locationlbl.TabIndex = 20;
+            this.locationlbl.Text = "Место";
+            // 
+            // locationBox
+            // 
+            this.locationBox.Location = new System.Drawing.Point(181, 70);
+            this.locationBox.Name = "locationBox";
+            this.locationBox.Size = new System.Drawing.Size(226, 20);
+            this.locationBox.TabIndex = 19;
+            this.locationBox.Text = "Lenina st, 81";
+            // 
+            // nameLbl
+            // 
+            this.nameLbl.AutoSize = true;
+            this.nameLbl.Location = new System.Drawing.Point(9, 48);
+            this.nameLbl.Name = "nameLbl";
+            this.nameLbl.Size = new System.Drawing.Size(57, 13);
+            this.nameLbl.TabIndex = 17;
+            this.nameLbl.Text = "Название";
+            // 
+            // infoNameBox
+            // 
+            this.infoNameBox.Location = new System.Drawing.Point(72, 45);
+            this.infoNameBox.Name = "infoNameBox";
+            this.infoNameBox.Size = new System.Drawing.Size(161, 20);
+            this.infoNameBox.TabIndex = 18;
+            this.infoNameBox.Text = "GeoInfoSys";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -446,48 +488,6 @@
             this.regBtn.UseVisualStyleBackColor = true;
             this.regBtn.Click += new System.EventHandler(this.regBtn_Click);
             // 
-            // nameLbl
-            // 
-            this.nameLbl.AutoSize = true;
-            this.nameLbl.Location = new System.Drawing.Point(9, 48);
-            this.nameLbl.Name = "nameLbl";
-            this.nameLbl.Size = new System.Drawing.Size(57, 13);
-            this.nameLbl.TabIndex = 17;
-            this.nameLbl.Text = "Название";
-            // 
-            // infoNameBox
-            // 
-            this.infoNameBox.Location = new System.Drawing.Point(72, 45);
-            this.infoNameBox.Name = "infoNameBox";
-            this.infoNameBox.Size = new System.Drawing.Size(161, 20);
-            this.infoNameBox.TabIndex = 18;
-            this.infoNameBox.Text = "GeoInfoSys";
-            // 
-            // locationBox
-            // 
-            this.locationBox.Location = new System.Drawing.Point(181, 70);
-            this.locationBox.Name = "locationBox";
-            this.locationBox.Size = new System.Drawing.Size(226, 20);
-            this.locationBox.TabIndex = 19;
-            this.locationBox.Text = "Lenina st, 81";
-            // 
-            // locationlbl
-            // 
-            this.locationlbl.AutoSize = true;
-            this.locationlbl.Location = new System.Drawing.Point(27, 73);
-            this.locationlbl.Name = "locationlbl";
-            this.locationlbl.Size = new System.Drawing.Size(39, 13);
-            this.locationlbl.TabIndex = 20;
-            this.locationlbl.Text = "Место";
-            // 
-            // cityBox
-            // 
-            this.cityBox.Location = new System.Drawing.Point(72, 70);
-            this.cityBox.Name = "cityBox";
-            this.cityBox.Size = new System.Drawing.Size(103, 20);
-            this.cityBox.TabIndex = 21;
-            this.cityBox.Text = "Tomsk";
-            // 
             // TestPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -500,6 +500,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.urlBox);
             this.Name = "TestPanel";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Консоль тестового клиента";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

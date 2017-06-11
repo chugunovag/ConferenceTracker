@@ -8,9 +8,15 @@ namespace StressTest {
     ///     Осуществляет регистрацию на центральном сервере.
     /// </summary>
     internal class InPlaceServer {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="conference">конференция для данного сервера. Из нее будет использован идентификатор секции.</param>
+        /// <param name="url">правильный адрес уентральногосервера (со слэшем в конце)</param>
         public InPlaceServer(Conference conference, string url) {
             Conference = conference;
-            CentralUrl = url.EndsWith(@"/") ? url : url + "/";
+            CentralUrl = url;
         }
 
         /// <summary>

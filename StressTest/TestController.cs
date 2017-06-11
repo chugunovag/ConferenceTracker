@@ -15,7 +15,7 @@ namespace StressTest {
         private static readonly Random Random = new Random();
 
         public void Dispose() {
-            StopEvent.Set();
+            StopAutoTest();
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace StressTest {
                         }
                     };
 
-                    var inPlaceServer = new InPlaceServer(conference, url);
+                    var inPlaceServer = new InPlaceServer(conference, url.EnsureUrl());
                     while (!StopEvent.WaitOne(500)) {
                         inPlaceServer.RegisterSectionData();
                         inPlaceServer.Conference.Info.City = GetRandom(cities);
@@ -79,7 +79,7 @@ namespace StressTest {
         /// <param name="section"></param>
         [Obsolete("Возможно, использование этого метода не актуально  надо уточнить задание.")]
         public void RegisterSectionManual(string url, string section) {
-            Helpers.Put<Conference>(url, null);
+            Helpers.Put<Conference>(url.EnsureUrl() + $"conference/{section}/info", null);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace StressTest {
         /// <param name="location"></param>
         /// <param name="name"></param>
         public void RegisterSectionManual(string url, string section, string city, string location, string name) {
-            Helpers.Put<Conference>(url, new ConferenceInfo {City = city, Location = location, Name = name});
+            Helpers.Put<Conference>(url.EnsureUrl() + $"conference/{section}/info", new ConferenceInfo {City = city, Location = location, Name = name});
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace StressTest {
         /// <param name="url">адрес центрального сервера</param>
         /// <returns></returns>
         public List<Conference> GetAll(string url) {
-            return Helpers.Get<List<Conference>>(url + "conference/info");
+            return Helpers.Get<List<Conference>>(url.EnsureUrl() + "conference/info");
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace StressTest {
         /// <param name="section"></param>
         /// <returns></returns>
         public ConferenceInfo GetSection(string url, string section) {
-            return Helpers.Get<ConferenceInfo>(url + "conference/GIS/info");
+            return Helpers.Get<ConferenceInfo>(url.EnsureUrl() + $"conference/{section}/info");
         }
 
         /// <summary>
@@ -120,6 +120,18 @@ namespace StressTest {
         /// <returns></returns>
         private static string GetRandom(IReadOnlyList<string> list) {
             return list?[Random.Next(list.Count)];
+        }
+
+    }
+
+    static class StringUrlExt {
+        /// <summary>
+        /// расширение для строки, которое выставляет при необходимости слэш в конце строки (считаем что есть такое соглашение).
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static string EnsureUrl(this string url) {
+            return url.EndsWith("/") ? url : url + "/";
         }
     }
 }
