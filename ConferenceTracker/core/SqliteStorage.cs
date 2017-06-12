@@ -2,10 +2,13 @@
 using System.Linq;
 using Common;
 using Common.data;
+using log4net;
 using LiteDB;
 
 namespace ConferenceTracker.core {
     internal class SqliteStorage : IStorage {
+        private static readonly ILog Log = LogManager.GetLogger(typeof(SqliteStorage));
+
         private readonly LiteCollection<Conference> _conferenceCollection;
         private readonly LiteDatabase _db;
 
@@ -19,6 +22,7 @@ namespace ConferenceTracker.core {
         ///     Хранилице данных по конференциям на основе БД sqlite. Имя задается.
         /// </summary>
         public SqliteStorage(string dbPath) {
+            Log.Debug("Init DB: " + dbPath);
             _db = new LiteDatabase(dbPath);
             _conferenceCollection = _db.GetCollection<Conference>("Conference");
         }
@@ -39,6 +43,7 @@ namespace ConferenceTracker.core {
         }
 
         public void Close() {
+            Log.Debug("Close DB");
             _db?.Dispose();
         }
     }

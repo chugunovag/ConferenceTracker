@@ -1,10 +1,10 @@
-using System;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Common;
 using Common.data;
+using log4net;
 
 namespace ConferenceTracker.controller {
     /// <summary>
@@ -12,6 +12,9 @@ namespace ConferenceTracker.controller {
     /// </summary>
     [RoutePrefix("conference")]
     public class ConferenceController : ApiController {
+
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ConferenceController));
+
         public IStorage Storage => Program.GetStorage();
 
         /// <summary>
@@ -21,7 +24,7 @@ namespace ConferenceTracker.controller {
         [HttpGet]
         [Route("info")]
         public IHttpActionResult FindAllSections() {
-            Console.WriteLine($"GET ALL: available: {Storage.Count}");
+            Log.Debug($"GET ALL: available: {Storage.Count}");
             var listConferences = Storage.ListConferences();
             return CreateResponse(listConferences);
         }
@@ -34,7 +37,7 @@ namespace ConferenceTracker.controller {
         [HttpGet]
         [Route("{section}/info")]
         public IHttpActionResult GetSection(string section) {
-            Console.WriteLine($"GET ONE: {section}");
+            Log.Debug($"GET ONE: {section}");
             var conference = Storage.GetConference(section);
             return conference != null ? CreateResponse(conference.Info) : CreateResponse(null, HttpStatusCode.NotFound);
             //эффект аналогичный, но тут не можем управлять телом ответа
@@ -49,7 +52,7 @@ namespace ConferenceTracker.controller {
         [HttpPut]
         [Route("{section}/info")]
         public IHttpActionResult RegisterSectionInfo(string section, [FromBody] ConferenceInfo conferenceInfo) {
-            Console.WriteLine($"PUT: {section} -> {conferenceInfo}");
+            Log.Debug($"PUT: {section} -> {conferenceInfo}");
             var conference = Storage.GetConference(section);
             if (conference == null) {
                 conference = new Conference {Section = section, Info = conferenceInfo};

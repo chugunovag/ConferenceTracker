@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Common.data;
 using Common.helper;
+using log4net;
 
 namespace StressTest {
     /// <summary>
@@ -10,6 +11,8 @@ namespace StressTest {
     ///     клиента.
     /// </summary>
     public class TestController : IDisposable {
+        private static readonly ILog Log = LogManager.GetLogger(typeof (TestController));
+
         private static readonly ManualResetEvent StopEvent = new ManualResetEvent(true);
 
         private static readonly Random Random = new Random();
@@ -31,10 +34,11 @@ namespace StressTest {
         ///     сервер конференции
         /// </param>
         public void DoAutoTest(string url, List<string> cities, List<string> streets, List<string> sections) {
+            Log.Debug("Starting autotest");
             StopEvent.Reset();
             sections.ForEach(s =>
             {
-                new Thread(o =>
+                var thread = new Thread(o =>
                 {
                     var conference = new Conference
                     {
@@ -53,7 +57,8 @@ namespace StressTest {
                         inPlaceServer.Conference.Info.City = GetRandom(cities);
                         inPlaceServer.Conference.Info.Location = GetRandom(streets);
                     }
-                }).Start();
+                }) {Name = s};
+                thread.Start();
             });
         }
 
@@ -69,6 +74,7 @@ namespace StressTest {
         ///     останавливает автотест
         /// </summary>
         public void StopAutoTest() {
+            Log.Debug("Stopping autotest");
             StopEvent.Set();
         }
 
@@ -91,7 +97,9 @@ namespace StressTest {
         /// <param name="location"></param>
         /// <param name="name"></param>
         public void RegisterSectionManual(string url, string section, string city, string location, string name) {
-            Helpers.Put<Conference>(url.EnsureUrl() + $"conference/{section}/info", new ConferenceInfo {City = city, Location = location, Name = name});
+            var fullUrl = url.EnsureUrl() + $"conference/{section}/info";
+            Log.Debug($"Try register {fullUrl}: {name} {city} {location}");
+            Helpers.Put<Conference>(fullUrl, new ConferenceInfo {City = city, Location = location, Name = name});
         }
 
         /// <summary>
@@ -100,6 +108,7 @@ namespace StressTest {
         /// <param name="url">адрес центрального сервера</param>
         /// <returns></returns>
         public List<Conference> GetAll(string url) {
+            Log.Debug($"Get all from {url}");
             return Helpers.Get<List<Conference>>(url.EnsureUrl() + "conference/info");
         }
 
@@ -110,6 +119,7 @@ namespace StressTest {
         /// <param name="section"></param>
         /// <returns></returns>
         public ConferenceInfo GetSection(string url, string section) {
+            Log.Debug($"find section: {url}: {section}");
             return Helpers.Get<ConferenceInfo>(url.EnsureUrl() + $"conference/{section}/info");
         }
 
@@ -121,12 +131,12 @@ namespace StressTest {
         private static string GetRandom(IReadOnlyList<string> list) {
             return list?[Random.Next(list.Count)];
         }
-
     }
 
-    static class StringUrlExt {
+    internal static class StringUrlExt {
         /// <summary>
-        /// расширение для строки, которое выставляет при необходимости слэш в конце строки (считаем что есть такое соглашение).
+        ///     расширение для строки, которое выставляет при необходимости слэш в конце строки (считаем что есть такое
+        ///     соглашение).
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>

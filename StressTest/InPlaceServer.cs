@@ -1,6 +1,7 @@
 ﻿using System;
 using Common.data;
 using Common.helper;
+using log4net;
 
 namespace StressTest {
     /// <summary>
@@ -8,6 +9,7 @@ namespace StressTest {
     ///     Осуществляет регистрацию на центральном сервере.
     /// </summary>
     internal class InPlaceServer {
+        private static readonly ILog Log = LogManager.GetLogger(typeof(InPlaceServer));
 
         /// <summary>
         /// 
@@ -32,10 +34,11 @@ namespace StressTest {
         [Obsolete("Возможно, использование этого метода не актуально  надо уточнить задание.")]
         public void RegisterSection() {
             try {
+                Log.Debug($"Try register section {Conference}");
                 Helpers.Put<Conference>($"{CentralUrl}conference/{Conference.Section}/info", null);
             }
             catch (Exception e) {
-                Console.WriteLine(e.ToString());
+                Log.Error("Can't register section",  e);
             }
         }
 
@@ -44,10 +47,11 @@ namespace StressTest {
         /// </summary>
         public void RegisterSectionData() {
             try {
+                Log.Debug($"Try register section {Conference}");
                 Helpers.Put<Conference>($"{CentralUrl}conference/{Conference.Section}/info", Conference.Info);
             }
             catch (Exception e) {
-                Console.WriteLine(e.ToString());
+                Log.Error("Can't register section", e);
             }
         }
     }
